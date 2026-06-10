@@ -64,12 +64,31 @@ The application seeds representative workflow and KPI data on first startup.
 
 ## Run with Docker
 
+Use the published, versioned image:
+
+```bash
+docker pull ghcr.io/krishnabyf/ai-delivery-enablement-control-plane:1.0.0
+docker run --name delivery-control-plane \
+  -p 8000:8000 \
+  -e CONTROL_PLANE_API_KEY=replace-with-a-long-random-secret \
+  -v control-plane-data:/app/data \
+  ghcr.io/krishnabyf/ai-delivery-enablement-control-plane:1.0.0
+```
+
+Or build locally with Docker Compose:
+
 ```bash
 cp .env.example .env
 # Set a strong CONTROL_PLANE_API_KEY in .env.
 docker compose up --build -d
 curl --fail http://localhost:8000/health
 ```
+
+Published image tags:
+
+- `1.0.0`: immutable release version
+- `1.0`: latest compatible 1.0 patch release
+- `latest`: most recent stable release
 
 ## API example
 

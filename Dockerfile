@@ -7,6 +7,9 @@ COPY app ./app
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir .
 
 FROM python:3.12-slim
+LABEL org.opencontainers.image.source="https://github.com/krishnabyf/ai-delivery-enablement-control-plane" \
+      org.opencontainers.image.description="Governed automation workflows and operational intelligence for scalable AI delivery." \
+      org.opencontainers.image.licenses="MIT"
 RUN groupadd --system app && useradd --system --gid app --home /app app
 WORKDIR /app
 COPY --from=builder /opt/venv /opt/venv
