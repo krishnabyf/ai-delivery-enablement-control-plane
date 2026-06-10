@@ -1,0 +1,19 @@
+services:
+  control-plane:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      CONTROL_PLANE_API_KEY: ${CONTROL_PLANE_API_KEY:-change-me-before-production}
+      CONTROL_PLANE_CORS_ORIGINS: ${CONTROL_PLANE_CORS_ORIGINS:-http://localhost:8000}
+      CONTROL_PLANE_SEED_DEMO_DATA: ${CONTROL_PLANE_SEED_DEMO_DATA:-true}
+    volumes:
+      - control-plane-data:/app/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  control-plane-data:
